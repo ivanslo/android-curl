@@ -3,6 +3,8 @@ android-curl
 
 Curl compiled with OpenSSL for Android (Supports Android L)
 
+Original project: https://github.com/hiteshsondhi88/android-curl
+
 Supported Architecture
 ----
 * arm
@@ -17,10 +19,6 @@ Instructions
   2. ./android_build.sh
 * Find the executable binary in build directory.
 * For working example check this repository - https://github.com/hiteshsondhi88/androidcurlsample
-
-![http://i.imgur.com/WYA2Kop.gif](http://i.imgur.com/WYA2Kop.gif)
-
-[Download APK](https://github.com/hiteshsondhi88/androidcurlsample/releases/download/v0.1.0/app-debug.apk)
 
 License
 ----
