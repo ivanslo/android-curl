@@ -10,7 +10,7 @@ autoreconf -ivf
 
 ./configure \
   --with-pic \
-  --host="$NDK_TOOLCHAIN_ABI" \
+  --host="$NDK_TOOLCHAIN_ABI_COMPILER" \
   --with-sysroot="$NDK_SYSROOT" \
   --with-ssl \
   --disable-shared \

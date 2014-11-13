@@ -7,23 +7,44 @@ BASEDIR=$2
 case $1 in
   armeabi)
     NDK_ABI='arm'
-    NDK_TOOLCHAIN_ABI='arm-linux-androideabi'
+    NDK_TOOLCHAIN_ABI_DIR='arm-linux-androideabi'    
+	NDK_TOOLCHAIN_ABI_COMPILER='arm-linux-androideabi'
   ;;
   armeabi-v7a)
     NDK_ABI='arm'
-    NDK_TOOLCHAIN_ABI='arm-linux-androideabi'
+    NDK_TOOLCHAIN_ABI_DIR='arm-linux-androideabi'
+	NDK_TOOLCHAIN_ABI_COMPILER='arm-linux-androideabi'
     ARCH_CPU='armv7-a'
     CFLAGS="$CFLAGS -march=$ARCH_CPU"
   ;;
+  mipsel)
+  	NDK_ABI='mipsel'
+  	NDK_TOOLCHAIN_ABI_DIR='mipsel-linux-android'
+	NDK_TOOLCHAIN_ABI_COMPILER='mipsel-linux-android'
+  ;;
+  x86)
+    NDK_ABI='x86'
+	NDK_TOOLCHAIN_ABI_DIR='x86'
+	NDK_TOOLCHAIN_ABI_COMPILER='i686-linux-android'
+  ;;
+  x86_64)
+  	NDK_ABI='x86_64'
+	NDK_TOOLCHAIN_ABI_DIR='x86_64'
+	NDK_TOOLCHAIN_ABI_COMPILER='x86_64-linux-android'
+  ;;
 esac
+
+
 
 TOOLCHAIN_PREFIX=${BASEDIR}/toolchain-android
 if [ ! -d "$TOOLCHAIN_PREFIX" ]; then
-  ${ANDROID_NDK_ROOT_PATH}/build/tools/make-standalone-toolchain.sh --toolchain=${NDK_TOOLCHAIN_ABI}-${NDK_TOOLCHAIN_ABI_VERSION} --platform=android-${ANDROID_API_VERSION} --install-dir=${TOOLCHAIN_PREFIX}
+  ${ANDROID_NDK_ROOT_PATH}/build/tools/make-standalone-toolchain.sh --toolchain=${NDK_TOOLCHAIN_ABI_DIR}-${NDK_TOOLCHAIN_ABI_VERSION} --platform=android-${ANDROID_API_VERSION} --install-dir=${TOOLCHAIN_PREFIX}
 fi
 
-CROSS_PREFIX=${TOOLCHAIN_PREFIX}/bin/${NDK_TOOLCHAIN_ABI}-
+
+CROSS_PREFIX=${TOOLCHAIN_PREFIX}/bin/${NDK_TOOLCHAIN_ABI_COMPILER}-
 NDK_SYSROOT=${TOOLCHAIN_PREFIX}/sysroot
+
 
 export CFLAGS="${CFLAGS} -Wformat -Wformat-security -Werror=format-security --param ssp-buffer-size=4  -fstack-protector -D_FORTIFY_SOURCE=2 -I${TOOLCHAIN_PREFIX}/include"
 export LDFLAGS="-Wl,-z,relro -Wl,-z,now -pie -L${TOOLCHAIN_PREFIX}/lib"

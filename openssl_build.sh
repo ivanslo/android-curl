@@ -13,7 +13,17 @@ case $1 in
   armeabi)
     OPENSSL_TARGET="android"
     ;;
+  mipsel)
+	OPENSSL_TARGET="android"
+  	;;
+  x86)
+    OPENSSL_TARGET="android-x86"
+  	;;
+  x86_64)
+  	OPENSSL_TARGET="android-x86"
+  	;;
 esac
+
 export ANDROID_DEV=${TOOLCHAIN_PREFIX}
 ./Configure \
   --prefix="${TOOLCHAIN_PREFIX}" \
